@@ -63,7 +63,7 @@ public class Shoot : MonoBehaviour
             {
                 Vector2 dir = (new Vector2(hit.point.x, hit.point.z)) - (new Vector2(player.position.x, player.position.z));
                 dir = dir.normalized * maxDistance;
-                crosshair.transform.position = new Vector3(player.position.x + dir.x, crosshair.transform.position.y, player.position.z + dir.);
+                crosshair.transform.position = new Vector3(player.position.x + dir.x, crosshair.transform.position.y, player.position.z + dir.y);
             }
             else
             {
