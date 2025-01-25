@@ -480,7 +480,7 @@ Transform:
   m_GameObject: {fileID: 197846126}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3599554, y: -0, z: -0, w: 0.9329695}
-  m_LocalPosition: {x: 0, y: 5.86, z: -10.32}
+  m_LocalPosition: {x: 0.81, y: 8.16, z: -11.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1032,6 +1032,7 @@ MonoBehaviour:
   _forceJump: 10
   _bumpForce: 12
   _cooldownJump: 3
+  _inputTimeLocker: 1.5
   _boueTransform: {fileID: 943395194}
 --- !u!114 &1400142846
 MonoBehaviour:
@@ -1155,7 +1156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a716b7abf75a54fbecc447874f9e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeInvicible: 1
+  _timeInvicible: 2.5
   _maxPlayerLife: 10
 --- !u!1 &1424974114
 GameObject:

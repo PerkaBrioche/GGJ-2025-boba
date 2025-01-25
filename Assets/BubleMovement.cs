@@ -10,6 +10,7 @@ public class BubleMovement : MonoBehaviour
     [SerializeField] private float _forceJump;
     [SerializeField] private float _bumpForce;
     [SerializeField] private float _cooldownJump;
+    [SerializeField] private float _inputTimeLocker;
     
     [Header("OTHERS")]
 
@@ -31,6 +32,7 @@ public class BubleMovement : MonoBehaviour
     private bool _resetingVelocity;
     private bool _canJump;
     private bool _restingJump;
+    private bool _canMoove;
     
     private void OnEnable()
     {
@@ -150,12 +152,16 @@ public class BubleMovement : MonoBehaviour
         }
         else
         {
+            // BOUNCE BOUE
+            StartCoroutine(StopPlayerInput());
+            _rigidbody.linearVelocity = Vector3.zero;
             Vector3 bouePosiiton = _boueTransform.position;
             Vector3 Obstacle = ObstaclePosition;
             Vector3 BOdir =  (bouePosiiton - Obstacle).normalized;
             _rigidbody.AddForce(BOdir * _bumpForce, ForceMode.Impulse);
         }
     }
+    
 
     private IEnumerator CoolDownJump()
     {
@@ -163,5 +169,12 @@ public class BubleMovement : MonoBehaviour
         yield return new WaitForSeconds(_cooldownJump);
         _canJump = true;
         _restingJump = false;
+    }
+
+    private IEnumerator StopPlayerInput()
+    {
+        _canMoove = false;
+        yield return new WaitForSeconds(_inputTimeLocker);
+        _canMoove = true;
     }
 }
