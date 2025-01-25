@@ -1,16 +1,25 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class playerMovement : MonoBehaviour
+public class BubleMovement : MonoBehaviour
 {
+    [Header("BUBLE PARAMETERS")]
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _forceJump;
-    [SerializeField] private float _propulsionForce;
-    [SerializeField] private float _raycastDownRange;
+    [SerializeField] private float _bumpForce;
+    [SerializeField] private float _cooldownJump;
+    
+    [Header("OTHERS")]
+
+    [SerializeField] private Transform _boueTransform;
+
+    
+    private float _propulsionForce;
+    private float _raycastDownRange = 1.8f;
+    private float alpha;
+
     private PlayerInput _bubbleInput;
     private InputAction _leftJoystick;
     private InputAction _jumpAction;
@@ -19,8 +28,9 @@ public class playerMovement : MonoBehaviour
     private Rigidbody _rigidbody;
     private Vector2 _playerInput;
 
-    private float alpha;
-    private bool _resetingVelocity; 
+    private bool _resetingVelocity;
+    private bool _canJump;
+    private bool _restingJump;
     
     private void OnEnable()
     {
@@ -56,8 +66,9 @@ public class playerMovement : MonoBehaviour
     
     public void Jump(InputAction.CallbackContext context)
     {
-        if (IsGrounded())
+        if (IsGrounded() && _canJump)
         {
+            _canJump = false;
             _rigidbody.AddForce(Vector3.up * _forceJump, ForceMode.Impulse);
         }
     }
@@ -109,6 +120,12 @@ public class playerMovement : MonoBehaviour
     {
         _playerInput = _leftJoystick.ReadValue<Vector2>();
         print(_rigidbody.linearVelocity);
+
+        if (!_canJump && !_restingJump)
+        {
+            _restingJump = true;
+            StartCoroutine(CoolDownJump());
+        }
     }
     
     private IEnumerator ResetVelocity()
@@ -121,5 +138,30 @@ public class playerMovement : MonoBehaviour
             yield return null;
         }
         
+    }
+
+    public void GetBounce(Vector3 ObstaclePosition)
+    {
+        if(PlayerManager.instance == null){return;}
+        PlayerManager.instance.GetDamage();
+        if (PlayerManager.instance.IsPlayerDead())
+        {
+            // ECLATER LA BULLE ICI
+        }
+        else
+        {
+            Vector3 bouePosiiton = _boueTransform.position;
+            Vector3 Obstacle = ObstaclePosition;
+            Vector3 POdir =  (bouePosiiton - Obstacle).normalized;
+            _rigidbody.AddForce(POdir * _bumpForce, ForceMode.Impulse);
+        }
+    }
+
+    private IEnumerator CoolDownJump()
+    {
+        _canJump = false;
+        yield return new WaitForSeconds(_cooldownJump);
+        _canJump = true;
+        _restingJump = false;
     }
 }

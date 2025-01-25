@@ -1,0 +1,87 @@
+using System;
+using System.Collections;
+using UnityEngine;
+
+public class PlayerManager : MonoBehaviour
+{
+    [Header("PLAYER PARAMETERS")] 
+    [SerializeField] private float _timeInvicible;
+    [SerializeField] private int _maxPlayerLife;
+    public static PlayerManager instance;
+
+    private int _life;
+    private bool _isDead;
+    private bool _isInvicible;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
+    private void Start()
+    {
+        _life = _maxPlayerLife;
+    }
+
+    public int GetLife()
+    {
+        return _life;
+    }
+
+    public void GetDamage()
+    {
+        if(_isInvicible){return;}
+        
+        SubstractLife();
+        SetInvicibility();
+    }
+    private void SubstractLife()
+    {
+        _life--;
+        CheckLife();
+    }
+
+    private void CheckLife()
+    {
+        if (_life <= 0)
+        {
+            Death();
+        }
+    }
+
+    private void SetInvicibility()
+    {
+        StartCoroutine(CoroutineInvicible());
+    }
+    
+
+    private void Death()
+    {
+        _isDead = true;
+    }
+
+    private IEnumerator CoroutineInvicible()
+    {
+        _isInvicible = true;
+        yield return new WaitForSeconds(_timeInvicible);
+        _isInvicible = false;
+    }
+
+    public bool IsPlayerDead()
+    {
+        return _isDead;
+    }
+
+    public bool IsInvicible()
+    {
+        return _isInvicible;
+    }
+    
+    
+    
+    
+    
+}
