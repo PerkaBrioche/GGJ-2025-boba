@@ -1171,7 +1171,7 @@ GameObject:
   - component: {fileID: 1424974115}
   - component: {fileID: 1424974119}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Obstacle
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1560,7 +1560,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b73b16525134697499060d8f4652efd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Increment: 0
+  _textScore: {fileID: 1800875059}
+  baseTimeBeforeIncrement: 1
+  reduceTimer: 0.96
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

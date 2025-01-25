@@ -67,6 +67,7 @@ public class BoueController : MonoBehaviour
         {
             difficultyCounter = 0;
             SetNewParameters();
+            ScoreManager.instance.NewDifficulty();
         }
         StartTimer();
 

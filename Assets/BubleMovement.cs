@@ -152,8 +152,8 @@ public class BubleMovement : MonoBehaviour
         {
             Vector3 bouePosiiton = _boueTransform.position;
             Vector3 Obstacle = ObstaclePosition;
-            Vector3 POdir =  (bouePosiiton - Obstacle).normalized;
-            _rigidbody.AddForce(POdir * _bumpForce, ForceMode.Impulse);
+            Vector3 BOdir =  (bouePosiiton - Obstacle).normalized;
+            _rigidbody.AddForce(BOdir * _bumpForce, ForceMode.Impulse);
         }
     }
 

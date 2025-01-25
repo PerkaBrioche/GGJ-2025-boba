@@ -1,20 +1,49 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
+    public static ScoreManager instance;
+
+    [SerializeField] private TextMeshProUGUI _textScore;
+    [SerializeField] private float baseTimeBeforeIncrement;
+    [SerializeField] private float reduceTimer;
     
-    [SerializeField] private int Increment;
+    private int Increment;
     private int _totalSccore;
 
     private float timer;
     private float timeBeforeIncrement;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
+    private void Start()
+    {
+        timeBeforeIncrement = baseTimeBeforeIncrement;
+    }
 
     private void Update()
     {
-        
+        _textScore.text = _totalSccore + "m";
+
+        if (timer < timeBeforeIncrement)
+        {
+            timer += Time.deltaTime;
+        }
+        else
+        {
+            timer = 0;
+            AddScore();
+        }
     }
+
 
     private void AddScore()
     {
@@ -23,6 +52,18 @@ public class ScoreManager : MonoBehaviour
 
     public void NewDifficulty()
     {
-        
+        //Increment++;
+        timeBeforeIncrement *= reduceTimer;
+    }
+
+    private void OnValidate()
+    {
+        if (reduceTimer > 0.99f)
+        {
+            reduceTimer = 0.99f;
+        }else if (reduceTimer < 0)
+        {
+            reduceTimer = 0.1f;
+        }
     }
 }
