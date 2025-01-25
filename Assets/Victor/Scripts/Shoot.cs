@@ -12,8 +12,6 @@ public class Shoot : MonoBehaviour
     Transform crosshair;
     [SerializeField] GameObject crosshairPrefab;
     [SerializeField] ParticleSystem waterParticle;
-    [SerializeField] Animator animator;
-    [SerializeField] string animationShootId = "Shoot";
     [SerializeField] Transform player;
     [SerializeField] float maxDistance = 4f;
     [SerializeField] float radius = 1.5f;
@@ -33,7 +31,6 @@ public class Shoot : MonoBehaviour
         {
             waterParticle.Stop();
         }
-        animator.SetBool(animationShootId, false);
     }
 
     private void Start()
@@ -55,7 +52,6 @@ public class Shoot : MonoBehaviour
             }
         }
         waterParticle.Play();
-        animator.SetBool(animationShootId, true);
     }
 
     private void Update()
@@ -66,9 +62,9 @@ public class Shoot : MonoBehaviour
 
             if(Vector2.Distance(new Vector2(player.position.x,player.position.z), new Vector2(hit.point.x,hit.point.z)) > maxDistance)
             {
-                Vector2 dir = (new Vector2(hit.point.x, hit.point.z)) - (new Vector2(player.position.x, player.position.z));
+                Vector3 dir = hit.point - player.position;
                 dir = dir.normalized * maxDistance;
-                crosshair.transform.position = new Vector3(player.position.x + dir.x, crosshair.transform.position.y, player.position.z + dir.y);
+                crosshair.transform.position = new Vector3(player.position.x + dir.x, crosshair.transform.position.y, player.position.z + dir.z);
             }
             else
             {
