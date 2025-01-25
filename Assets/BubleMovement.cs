@@ -15,6 +15,8 @@ public class BubleMovement : MonoBehaviour
     [Header("OTHERS")]
 
     [SerializeField] private Transform _boueTransform;
+    [SerializeField] private Animator _BobaAnimator;
+//    [SerializeField] private BobaController _bobaController;
 
     
     private float _propulsionForce;
@@ -72,6 +74,8 @@ public class BubleMovement : MonoBehaviour
         {
             _canJump = false;
             _rigidbody.AddForce(Vector3.up * _forceJump, ForceMode.Impulse);
+            _BobaAnimator.SetTrigger("Jump");
+            //_bobaController.SetState(BobaController.BobaState.jumping);
         }
     }
 
@@ -96,8 +100,17 @@ public class BubleMovement : MonoBehaviour
             //     StopCoroutine("ResetVelocity");
             //     _resetingVelocity = false;
             // }
-            
-            
+
+
+            if (_playerInput.x != 0 || _playerInput.y != 0)
+            {
+                _BobaAnimator.SetBool("Running", true);
+            }
+            else
+            {
+                _BobaAnimator.SetBool("Running", false);
+            }
+        
             _rigidbody.AddTorque(new Vector3(_playerInput.y, 0f, -_playerInput.x) * _rotationSpeed);
             _rigidbody.AddForce(new Vector3(_playerInput.x, 0f, _playerInput.y) * _moveSpeed, ForceMode.Acceleration);
        // }
