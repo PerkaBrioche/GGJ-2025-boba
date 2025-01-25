@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class playerMovement : MonoBehaviour
 {
+    [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _forceJump;
     [SerializeField] private float _propulsionForce;
@@ -84,7 +85,8 @@ public class playerMovement : MonoBehaviour
             // }
             
             
-            _rigidbody.AddTorque(new Vector3(_playerInput.y, 0f, -_playerInput.x) * _moveSpeed);
+            _rigidbody.AddTorque(new Vector3(_playerInput.y, 0f, -_playerInput.x) * _rotationSpeed);
+            _rigidbody.AddForce(new Vector3(_playerInput.x, 0f, _playerInput.y) * _moveSpeed, ForceMode.Acceleration);
        // }
         
 
