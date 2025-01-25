@@ -8,6 +8,9 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float _timeInvicible;
     [SerializeField] private int _maxPlayerLife;
     public static PlayerManager instance;
+    
+    [Header("OTHERS")]
+    [SerializeField] private Animator _bubleAnimator;
 
     private int _life;
     private bool _isDead;
@@ -34,6 +37,8 @@ public class PlayerManager : MonoBehaviour
     public void GetDamage()
     {
         if(_isInvicible){return;}
+        _bubleAnimator.SetTrigger("GetHit");
+        
         
         SubstractLife();
         SetInvicibility();

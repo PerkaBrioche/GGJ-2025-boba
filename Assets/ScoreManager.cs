@@ -10,7 +10,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private float baseTimeBeforeIncrement;
     [SerializeField] private float reduceTimer;
     
-    private int Increment;
+    private int Increment = 1;
     private int _totalSccore;
 
     private float timer;
@@ -41,6 +41,7 @@ public class ScoreManager : MonoBehaviour
         {
             timer = 0;
             AddScore();
+            timeBeforeIncrement = baseTimeBeforeIncrement;
         }
     }
 
@@ -53,7 +54,7 @@ public class ScoreManager : MonoBehaviour
     public void NewDifficulty()
     {
         //Increment++;
-        timeBeforeIncrement *= reduceTimer;
+        baseTimeBeforeIncrement *= reduceTimer;
     }
 
     private void OnValidate()
