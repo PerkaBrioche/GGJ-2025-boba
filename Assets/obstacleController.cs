@@ -7,7 +7,6 @@ public class obstacleController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if(PlayerManager.instance.IsInvicible()){return;}
             other.GetComponent<BubleMovement>().GetBounce(transform.position);
         }
     }

@@ -145,21 +145,20 @@ public class BubleMovement : MonoBehaviour
     public void GetBounce(Vector3 ObstaclePosition)
     {
         if(PlayerManager.instance == null){return;}
+
+        if (PlayerManager.instance.IsPlayerDead()) {return;}
+
+        
+        StartCoroutine(StopPlayerInput());
+        _rigidbody.linearVelocity = Vector3.zero;
+        Vector3 bouePosiiton = _boueTransform.position;
+        Vector3 Obstacle = ObstaclePosition;
+        Vector3 BOdir =  (bouePosiiton - Obstacle).normalized;
+        _rigidbody.AddForce(BOdir * _bumpForce, ForceMode.Impulse);
+        
+        if(PlayerManager.instance.IsInvicible()){return;}
+        
         PlayerManager.instance.GetDamage();
-        if (PlayerManager.instance.IsPlayerDead())
-        {
-            // ECLATER LA BULLE ICI
-        }
-        else
-        {
-            // BOUNCE BOUE
-            StartCoroutine(StopPlayerInput());
-            _rigidbody.linearVelocity = Vector3.zero;
-            Vector3 bouePosiiton = _boueTransform.position;
-            Vector3 Obstacle = ObstaclePosition;
-            Vector3 BOdir =  (bouePosiiton - Obstacle).normalized;
-            _rigidbody.AddForce(BOdir * _bumpForce, ForceMode.Impulse);
-        }
     }
     
 

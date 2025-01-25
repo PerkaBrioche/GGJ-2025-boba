@@ -49,6 +49,7 @@ public class BoueController : MonoBehaviour
     {
         float alpha = 0;
         Vector3 myPos = transform.position;
+        Vector3 targetDestination = new Vector3(destination.x, 0, destination.z);
         while (alpha < 1)
         {
             alpha += Time.deltaTime / movingDuration;
