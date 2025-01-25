@@ -11,6 +11,7 @@ public class Shoot : MonoBehaviour
     [SerializeField] InputAction mouseClick;
     Transform crosshair;
     [SerializeField] GameObject crosshairPrefab;
+    [SerializeField] ParticleSystem waterParticle;
     [SerializeField] Transform player;
     [SerializeField] float maxDistance = 4f;
     [SerializeField] float radius = 1.5f;
@@ -21,6 +22,20 @@ public class Shoot : MonoBehaviour
         crosshair = Instantiate(crosshairPrefab).transform;
         EnableInputs();
         mouseClick.performed += OnMouseClick;
+        mouseClick.canceled += OnMouseTopClicking;
+    }
+
+    private void OnMouseTopClicking(InputAction.CallbackContext context)
+    {
+        if(waterParticle.isPlaying)
+        {
+            waterParticle.Stop();
+        }
+    }
+
+    private void Start()
+    {
+        GetComponentInChildren<particleAttractorLinear>().target = crosshair;
     }
 
     private void OnMouseClick(InputAction.CallbackContext obj)
@@ -36,6 +51,7 @@ public class Shoot : MonoBehaviour
                 }
             }
         }
+        waterParticle.Play();
     }
 
     private void Update()
