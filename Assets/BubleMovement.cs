@@ -14,13 +14,14 @@ public class BubleMovement : MonoBehaviour
     
     [Header("OTHERS")]
 
+    
     [SerializeField] private Transform _boueTransform;
-    [SerializeField] private Animator _BobaAnimator;
-//    [SerializeField] private BobaController _bobaController;
+   [SerializeField] private BobaController _bobaController;
 
     
     private float _propulsionForce;
-    private float _raycastDownRange = 1.8f;
+    [SerializeField] private float _raycastDownRange = 1.8f;
+    [SerializeField] private float time;
     private float alpha;
 
     private PlayerInput _bubbleInput;
@@ -32,7 +33,7 @@ public class BubleMovement : MonoBehaviour
     private Vector2 _playerInput;
 
     private bool _resetingVelocity;
-    private bool _canJump;
+    private bool _canJump = true;
     private bool _restingJump;
     private bool _canMoove;
     
@@ -73,9 +74,8 @@ public class BubleMovement : MonoBehaviour
         if (IsGrounded() && _canJump)
         {
             _canJump = false;
-            _rigidbody.AddForce(Vector3.up * _forceJump, ForceMode.Impulse);
-            _BobaAnimator.SetTrigger("Jump");
-            //_bobaController.SetState(BobaController.BobaState.jumping);
+            _bobaController.jump();
+            StartCoroutine(WaitForImpulsion());
         }
     }
 
@@ -104,11 +104,12 @@ public class BubleMovement : MonoBehaviour
 
             if (_playerInput.x != 0 || _playerInput.y != 0)
             {
-                _BobaAnimator.SetBool("Running", true);
+                _bobaController.SetState(BobaController.BobaState.running);
+                _bobaController.UpdatePlayerInput(-_playerInput);
             }
             else
             {
-                _BobaAnimator.SetBool("Running", false);
+                _bobaController.SetState(BobaController.BobaState.idle);
             }
         
             _rigidbody.AddTorque(new Vector3(_playerInput.y, 0f, -_playerInput.x) * _rotationSpeed);
@@ -138,6 +139,7 @@ public class BubleMovement : MonoBehaviour
 
         if (!_canJump && !_restingJump)
         {
+            _bobaController.ChildFollowY();
             _restingJump = true;
             StartCoroutine(CoolDownJump());
         }
@@ -188,5 +190,12 @@ public class BubleMovement : MonoBehaviour
         _canMoove = false;
         yield return new WaitForSeconds(_inputTimeLocker);
         _canMoove = true;
+    }
+    
+    private IEnumerator WaitForImpulsion()
+    {
+        yield return new WaitForSeconds(time);
+        _rigidbody.AddForce(Vector3.up * _forceJump, ForceMode.Impulse);
+        _bobaController.ChildFollowY();
     }
 }

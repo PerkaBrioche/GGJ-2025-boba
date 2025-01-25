@@ -38,6 +38,7 @@ public class PlayerManager : MonoBehaviour
     {
         if(_isInvicible){return;}
         _bubleAnimator.SetTrigger("GetHit");
+        GameManager.Instance.ShakeCamera(1.7f, 0.6f, 1f);
         
         
         SubstractLife();
