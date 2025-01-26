@@ -6,14 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: f7497773a37e2bf448388df778a3acc8
+    path: Assets/Scenes/MENU THAUMASSS.unity
+    guid: ee15d1b2aa8d7884e833f01c3699b8b7
   - enabled: 1
     path: Assets/Scenes/Gabriel.unity
     guid: d45e0a7c62869c24f8f5b741b976b09d
-  - enabled: 0
-    path: Assets/Scenes/HUB.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/ControlMenu.unity
+    guid: a32657df80538734da9acfa1335f9e7d
   - enabled: 1
     path: Assets/Scenes/DefeatMenu.unity
     guid: 23f87482a56dbb74c9f4ab06f2df02ac
