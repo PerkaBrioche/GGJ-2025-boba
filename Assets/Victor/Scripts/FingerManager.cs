@@ -41,7 +41,7 @@ public class FingerManager : MonoBehaviour
         {
             yield return null;
             t += Time.deltaTime;
-            model.position = Vector3.back * (backAmount - (backAmount * (t / timeToGo / 4)));
+            model.position = Vector3.forward * (backAmount - (backAmount * (t / timeToGo / 4)));
         }
         Destroy(gameObject);
     }
