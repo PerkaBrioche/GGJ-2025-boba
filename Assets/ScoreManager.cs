@@ -9,9 +9,9 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _textScore;
     [SerializeField] private float reduceTimer;
     
-    private int _totalSccore;
+    public int _totalScore;
 
-    private float timer;
+    public float timer;
 
     private void Awake()
     {
@@ -23,6 +23,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
+        
     }
 
     private void Update()
@@ -41,6 +42,16 @@ public class ScoreManager : MonoBehaviour
         }else if (reduceTimer < 0)
         {
             reduceTimer = 0.1f;
+        }
+    }
+
+    public void PlayerIsDead()
+    {
+        _totalScore = Mathf.FloorToInt(timer);
+        PlayerPrefs.SetInt("ActualScore", _totalScore);
+        if(_totalScore >= PlayerPrefs.GetInt("ActualScore"))
+        {
+            PlayerPrefs.SetInt("BestScore", _totalScore);
         }
     }
 }
