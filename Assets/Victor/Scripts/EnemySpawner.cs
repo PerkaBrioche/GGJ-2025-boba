@@ -14,6 +14,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+        lastSpawnTime = Time.time;
         EnemyDied += OnEnemyDied;
     }
 
@@ -26,7 +27,8 @@ public class EnemySpawner : MonoBehaviour
     void SpawnRandomEnemy()
     {
         lastSpawnTime = Time.time;
-        Instantiate(enemiesPrefab[UnityEngine.Random.Range(0, enemiesPrefab.Count)],player.position, Quaternion.identity);
+        GameObject randomPrefab = enemiesPrefab[UnityEngine.Random.Range(0, enemiesPrefab.Count)];
+        Instantiate(randomPrefab, new Vector3(player.position.x, randomPrefab.transform.localPosition.y, player.position.x) , Quaternion.identity);
     }
 
     private void Update()

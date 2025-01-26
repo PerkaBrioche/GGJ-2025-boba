@@ -5,13 +5,13 @@ using UnityEngine;
 public class NetManager : MonoBehaviour
 {
     [SerializeField] List<NetCorner> corners;
-    [SerializeField] Animator animator;
-    [SerializeField] Vector3 from;
-    [SerializeField] Vector3 to;
+    [SerializeField] float from;
+    [SerializeField] float to;
     [SerializeField] float timeToGo = 5f;
 
     private void Start()
     {
+        transform.localEulerAngles = Vector3.up * Random.Range(0, 360);
         StartCoroutine(Animation());
     }
 
@@ -36,8 +36,9 @@ public class NetManager : MonoBehaviour
     IEnumerator Animation()
     {
         float t = 0f;
-        Vector3 m_from = transform.position - from;
-        Vector3 m_to = transform.position + to;
+        Vector3 m_from = transform.forward * from;
+        Vector3 m_to = (-transform.forward) * to;
+        transform.LookAt(m_to, Vector3.up);
         while (t < timeToGo)
         {
             yield return null;
@@ -45,12 +46,13 @@ public class NetManager : MonoBehaviour
             transform.position = Vector3.Lerp(m_from, m_to, t / timeToGo);
         }
         transform.position = Vector3.Lerp(m_from, m_to, 1f);
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawSphere(transform.position - from, 0.1f);
-        Gizmos.DrawSphere(transform.position + to, 0.1f);
+        Gizmos.DrawSphere(transform.forward * from, 0.1f);
+        Gizmos.DrawSphere((-transform.forward) * to, 0.1f);
     }
 }
