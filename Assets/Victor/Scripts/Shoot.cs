@@ -61,12 +61,11 @@ public class Shoot : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseCord.ReadValue<Vector2>()), out hit))
         {
-
             if(Vector2.Distance(new Vector2(player.position.x,player.position.z), new Vector2(hit.point.x,hit.point.z)) > maxDistance)
             {
-                Vector3 dir = hit.point - player.position;
+                Vector2 dir = (new Vector2(hit.point.x, hit.point.z)) - (new Vector2(player.position.x, player.position.z));
                 dir = dir.normalized * maxDistance;
-                crosshair.transform.position = new Vector3(player.position.x + dir.x, crosshair.transform.position.y, player.position.z + dir.z);
+                crosshair.transform.position = new Vector3(player.position.x + dir.x, crosshair.transform.position.y, player.position.z + dir.y);
             }
             else
             {
