@@ -12,9 +12,11 @@ public class BubleMovement : MonoBehaviour
     [SerializeField] private float _cooldownJump;
     [SerializeField] private float _inputTimeLocker;
     
+    
     [Header("OTHERS")]
 
     
+    [SerializeField] private Material _bulleMaterial;
     [SerializeField] private Transform _boueTransform;
    [SerializeField] private BobaController _bobaController;
 
@@ -22,6 +24,7 @@ public class BubleMovement : MonoBehaviour
     private float _propulsionForce;
     [SerializeField] private float _raycastDownRange = 1.8f;
     [SerializeField] private float time;
+    [SerializeField] private float secondTime;
     private float alpha;
 
     private PlayerInput _bubbleInput;
@@ -34,7 +37,7 @@ public class BubleMovement : MonoBehaviour
 
     private bool _resetingVelocity;
     private bool _canJump = true;
-    private bool _restingJump;
+    private bool isJumping = false;
     private bool _canMoove;
     
     private void OnEnable()
@@ -135,13 +138,12 @@ public class BubleMovement : MonoBehaviour
     private void Update()
     {
         _playerInput = _leftJoystick.ReadValue<Vector2>();
-        print(_rigidbody.linearVelocity);
-
-        if (!_canJump && !_restingJump)
+        if (!_canJump && isJumping && IsGrounded())
         {
             _bobaController.ChildFollowY();
-            _restingJump = true;
+            isJumping = false;
             StartCoroutine(CoolDownJump());
+            StartCoroutine(BubleRecuperation());
         }
     }
     
@@ -182,7 +184,6 @@ public class BubleMovement : MonoBehaviour
         _canJump = false;
         yield return new WaitForSeconds(_cooldownJump);
         _canJump = true;
-        _restingJump = false;
     }
 
     private IEnumerator StopPlayerInput()
@@ -194,8 +195,23 @@ public class BubleMovement : MonoBehaviour
     
     private IEnumerator WaitForImpulsion()
     {
-        yield return new WaitForSeconds(time);
         _rigidbody.AddForce(Vector3.up * _forceJump, ForceMode.Impulse);
+        yield return new WaitForSeconds(time);
         _bobaController.ChildFollowY();
+        yield return new WaitForSeconds(secondTime);
+
+        isJumping = true;
+    }
+
+    private IEnumerator BubleRecuperation()
+    {
+        float alpha = 1;
+        Color color = _bulleMaterial.color;
+        while (alpha > 0)
+        {
+            alpha -= Time.deltaTime / _cooldownJump;
+            _bulleMaterial.color = Color.Lerp(color, Color.green, alpha);
+            yield return null;
+        }
     }
 }

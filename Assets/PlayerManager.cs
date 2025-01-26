@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager instance;
     
     [Header("OTHERS")]
+    [SerializeField] private Transform _horizontalLaoyutLife;
     [SerializeField] private Animator _bubleAnimator;
 
     private int _life;
@@ -40,6 +41,7 @@ public class PlayerManager : MonoBehaviour
         _bubleAnimator.SetTrigger("GetHit");
         GameManager.Instance.ShakeCamera(1.7f, 0.6f, 1f);
         
+        _horizontalLaoyutLife.GetChild(_life - 1).gameObject.SetActive(false);
         
         SubstractLife();
         SetInvicibility();
