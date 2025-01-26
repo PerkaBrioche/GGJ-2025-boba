@@ -78,6 +78,7 @@ public class BubleMovement : MonoBehaviour
         {
             _canJump = false;
             _bobaController.jump();
+            SoundManagerScript.instance.ActivateSound(2, "OneShot");
             StartCoroutine(WaitForImpulsion());
         }
     }

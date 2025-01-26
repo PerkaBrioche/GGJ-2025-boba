@@ -41,6 +41,7 @@ public class PlayerManager : MonoBehaviour
         if(_isInvicible){return;}
         _bubleAnimator.SetTrigger("GetHit");
         GameManager.Instance.ShakeCamera(1.7f, 0.6f, 1f);
+        SoundManagerScript.instance.ActivateSound(5, "OneShot");
         
         _horizontalLaoyutLife.GetChild(_life - 1).gameObject.SetActive(false);
         
@@ -70,7 +71,8 @@ public class PlayerManager : MonoBehaviour
     private void Death()
     {
         _isDead = true;
-        SceneManager.LoadScene(3);
+        SoundManagerScript.instance.ActivateSound(6, "OneShot");
+        SceneManager.LoadScene(1);
     }
 
     private IEnumerator CoroutineInvicible()

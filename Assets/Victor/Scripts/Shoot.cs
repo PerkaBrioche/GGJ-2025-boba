@@ -55,6 +55,7 @@ public class Shoot : MonoBehaviour
             }
         }
         waterParticle.Play();
+        SoundManagerScript.instance.ActivateSound(8, "OneShot");
     }
 
     private void Update()
