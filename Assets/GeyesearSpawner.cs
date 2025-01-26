@@ -9,6 +9,7 @@ public class GeyesearSpawner : MonoBehaviour
     private void Start()
     {
         var warning = Instantiate(_PREgeyesearPrefab, _geyesearPrefab.position, Quaternion.identity);
+        SoundManagerScript.instance.ActivateSound(9, "OneShot");
         Destroy(warning, 3);
         StartCoroutine(SpawnGeyesear());
     }
@@ -17,6 +18,7 @@ public class GeyesearSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         var g = Instantiate(_geyesearPrefab, _geyesearPrefab.position, Quaternion.identity);
+        SoundManagerScript.instance.ActivateSound(10, "OneShot");
         Destroy(g.gameObject, 3.5f);
     }
 }

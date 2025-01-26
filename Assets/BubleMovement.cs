@@ -78,6 +78,7 @@ public class BubleMovement : MonoBehaviour
         {
             _canJump = false;
             _bobaController.jump();
+            SoundManagerScript.instance.ActivateSound(2, "OneShot");
             StartCoroutine(WaitForImpulsion());
         }
     }
@@ -107,7 +108,12 @@ public class BubleMovement : MonoBehaviour
 
             if (_playerInput.x != 0 || _playerInput.y != 0)
             {
-                _bobaController.SetState(BobaController.BobaState.running);
+
+                if (IsGrounded())
+                {
+                    _bobaController.SetState(BobaController.BobaState.running);
+                }
+                
                 _bobaController.UpdatePlayerInput(-_playerInput);
             }
             else
