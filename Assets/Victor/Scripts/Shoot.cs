@@ -24,10 +24,10 @@ public class Shoot : MonoBehaviour
         crosshair = Instantiate(crosshairPrefab).transform;
         EnableInputs();
         mouseClick.performed += OnMouseClick;
-        mouseClick.canceled += OnMouseTopClicking;
+        mouseClick.canceled += OnMouseStopClicking;
     }
 
-    private void OnMouseTopClicking(InputAction.CallbackContext context)
+    private void OnMouseStopClicking(InputAction.CallbackContext context)
     {
         if(waterParticle.isPlaying)
         {
@@ -47,7 +47,7 @@ public class Shoot : MonoBehaviour
         {
             foreach (Collider hit in colliders)
             {
-                if (hit.GetComponent<Collider>().gameObject.TryGetComponent<IDamageable>(out IDamageable damageable))
+                if (hit.gameObject.TryGetComponent(out IDamageable damageable))
                 {
                     damageable.Damage();
                 }
