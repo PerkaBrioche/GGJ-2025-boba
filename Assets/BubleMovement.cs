@@ -16,7 +16,7 @@ public class BubleMovement : MonoBehaviour
     [Header("OTHERS")]
 
     
-    [SerializeField] private Material _bulleMaterial;
+    [SerializeField] private MeshRenderer _bulleMaterial;
     [SerializeField] private Transform _boueTransform;
    [SerializeField] private BobaController _bobaController;
 
@@ -206,11 +206,11 @@ public class BubleMovement : MonoBehaviour
     private IEnumerator BubleRecuperation()
     {
         float alpha = 1;
-        Color color = _bulleMaterial.color;
+        Color baseColor = _bulleMaterial.material.color;
         while (alpha > 0)
         {
             alpha -= Time.deltaTime / _cooldownJump;
-            _bulleMaterial.color = Color.Lerp(color, Color.green, alpha);
+            _bulleMaterial.material.color = Color.Lerp(baseColor , Color.green, alpha);
             yield return null;
         }
     }

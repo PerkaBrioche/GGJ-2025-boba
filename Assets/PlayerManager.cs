@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -69,6 +70,7 @@ public class PlayerManager : MonoBehaviour
     private void Death()
     {
         _isDead = true;
+        SceneManager.LoadScene(1);
     }
 
     private IEnumerator CoroutineInvicible()

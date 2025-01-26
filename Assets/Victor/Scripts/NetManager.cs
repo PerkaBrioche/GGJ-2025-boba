@@ -18,8 +18,9 @@ public class NetManager : MonoBehaviour
         else if(gameObject.name == "Wave(Clone)")
         {
             SoundManagerScript.instance.ActivateSound(12, "OneShot");
-            
         }
+        
+        
         transform.localEulerAngles = Vector3.up * Random.Range(0, 360);
         StartCoroutine(Animation());
     }

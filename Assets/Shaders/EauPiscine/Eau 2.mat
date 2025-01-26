@@ -108,10 +108,10 @@ Material:
     - _HorizonDistance: 13
     - _IntersectionFoamBlend: 1.09
     - _IntersectionFoamCutoff: 3.57
-    - _IntersectionFoamDepth: 0.45
+    - _IntersectionFoamDepth: 1.01
     - _IntersectionFoamDirection: 0.65
     - _IntersectionFoamFade: 1.48
-    - _IntersectionFoamSpeed: 0.16
+    - _IntersectionFoamSpeed: 0.05
     - _IntersectionFoamTiling: 1.27
     - _LightingHardness: 0
     - _LightingSmoothness: 12.34
@@ -136,19 +136,19 @@ Material:
     - _SurfaceFoamDirection: 0
     - _SurfaceFoamDistorsion: 0.4
     - _SurfaceFoamSpeed: 0
-    - _SurfaceFoamTiling: 1.04
+    - _SurfaceFoamTiling: 0.43
     - _TileSize: 200
     - _WORLD_SPACE_UV: 1
     - _WaterAlpha: 1
     - _WaterMetallic: 0.559
     - _WaterSmoothness: 0.581
-    - _WaveLength: 1.38
-    - _WaveSpeed: 0.56
-    - _WaveSteepness: 0.09
+    - _WaveLength: 0.24
+    - _WaveSpeed: -0.03
+    - _WaveSteepness: 1.78
     - _WaveStepness: 0.35
     m_Colors:
     - _BaseColor: {r: 0, g: 0.1989687, b: 1.110646, a: 1}
-    - _CaveColor: {r: 0, g: 0.2746129, b: 1, a: 0.41960785}
+    - _CaveColor: {r: 0.25455865, g: 0.28999487, b: 0.38364768, a: 0.41960785}
     - _CaveOffset: {r: -0.45, g: 0, b: 0, a: 0}
     - _CaveScale: {r: 0.01, g: 0.01, b: 0, a: 0}
     - _CaveSecondaryColor: {r: 0, g: 0, b: 0, a: 0}
@@ -156,12 +156,12 @@ Material:
     - _FoamUVsOffset: {r: 2.23, g: 1.26, b: 0, a: 0}
     - _FresnelColor: {r: 2.670157, g: 2.670157, b: 2.670157, a: 0}
     - _HorizonColor: {r: 3.2873485, g: 0.77231586, b: 0, a: 1}
-    - _IntersectionFoamColor: {r: 0.47358483, g: 0.49990544, b: 1, a: 1}
+    - _IntersectionFoamColor: {r: 0.38679236, g: 0.5597572, b: 1, a: 1}
     - _PositionRipples: {r: 0, g: 0, b: 0, a: 0}
-    - _SecondaryFoamColor: {r: 0, g: 0.085165314, b: 0.4867924, a: 1}
+    - _SecondaryFoamColor: {r: 0.040939804, g: 0.06588278, b: 0.18867922, a: 1}
     - _ShallowColor: {r: 0, g: 0.13186789, b: 1, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 0.31764707}
-    - _SurfaceFoamColor: {r: 0, g: 0.3601899, b: 1, a: 1}
+    - _SurfaceFoamColor: {r: 0.082848735, g: 0.1870987, b: 0.37106913, a: 1}
     - _TopColor: {r: 0, g: 0.17848217, b: 0.5622641, a: 0.44705883}
     - _UV: {r: 0, g: 0, b: 0, a: 0}
     - _UVRipples: {r: 0, g: 0, b: 0, a: 0}

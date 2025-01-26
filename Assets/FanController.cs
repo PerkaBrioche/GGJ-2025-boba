@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class FanController : MonoBehaviour
 {
+    [SerializeField] private Transform pushParticule;
+    [SerializeField] private Transform AttractionParticule;
     [SerializeField] public Transform _bulle;
     [SerializeField] private float PushForce = 5;
     [SerializeField] public FanSpawner FanSpawner;
+    [SerializeField] public float rotationSpeed = 10;
+    
+    private bool isPusing = false;
 
 
     private void Start()
@@ -17,7 +22,9 @@ public class FanController : MonoBehaviour
     private void FixedUpdate()
     {
         PushPlayer();
-        transform.LookAt(_bulle, Vector3.up);
+        Vector3 targetDirection = _bulle.position - transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
     }
 
     private void PushPlayer()
@@ -29,7 +36,17 @@ public class FanController : MonoBehaviour
 
     private void ChangeMode()
     {
-        PushForce = -PushForce;
+        isPusing = !isPusing;
+        pushParticule.gameObject.SetActive(isPusing);
+        AttractionParticule.gameObject.SetActive(!isPusing);
+        if (isPusing)
+        {
+            PushForce = PushForce * 1;
+        }
+        else
+        {
+            PushForce = PushForce * -1;
+        }
         StartCoroutine(changeModeCoroutine());
     }
     
@@ -42,7 +59,8 @@ public class FanController : MonoBehaviour
     public void End()
     {
         FanSpawner.SetCanSpawn();
-        StartCoroutine(LerpPosition());
+        Destroy(gameObject);
+     //   StartCoroutine(LerpPosition());
     }
     
     private IEnumerator LerpPosition()

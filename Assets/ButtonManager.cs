@@ -9,24 +9,29 @@ public class ButtonManager : MonoBehaviour
     private List<GameObject> ButtonSpawned;
 
     [SerializeField] private FanController FanController;
+
+    public int buttonClicked;
     
     private void Start()
     {
+        ButtonSpawned = new List<GameObject>();
         SpawnButton();
     }
     
     private void SpawnButton()
     {
-        foreach (var buttonPosition in ListOfButtonsPosition)
+        for (int i = 0; i < ListOfButtonsPosition.Count; i++)
         {
-            var but = Instantiate(ButtonPrefab, buttonPosition.position, buttonPosition.rotation, buttonPosition);
-            
-            ButtonSpawned.Add(but);
+            print(ListOfButtonsPosition.Count);
+            var button = Instantiate(ButtonPrefab, ListOfButtonsPosition[i].position, Quaternion.identity,ListOfButtonsPosition[i] );
+            ButtonSpawned.Add(button);
+            button.GetComponent<ButtonController>().ButtonManager = this;
         }
     }
 
     private void Update()
     {
+        
         if (IsEnded())
         {
             FanController.End();
@@ -36,14 +41,10 @@ public class ButtonManager : MonoBehaviour
 
     private bool IsEnded()
     {
-        bool isEnded = true;
-        foreach (var but in ButtonSpawned)
+        if(buttonClicked == ListOfButtonsPosition.Count)
         {
-            if(but != null)
-            {
-                isEnded = false;
-            }
+            return true;
         }
-        return isEnded;
+        return false;
     }
 }

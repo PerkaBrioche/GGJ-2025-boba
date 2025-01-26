@@ -9,20 +9,24 @@ public class FanSpawner : MonoBehaviour
     [SerializeField] private List<Transform> _Butositions;
     [SerializeField] private GameObject _fanPrefab;
     [SerializeField] private Transform _bulle;
+    [SerializeField] private Transform boueTransform;
+    
 
     
     private int spawnChanceMax = 10;
     private int spawnChance = 10;
     private bool _isCoolD;
+    private bool _canSpawn;
 
     private void Start()
     {
-        SpawnFan();
+        _canSpawn = true;
     }
 
     private void SpawnFan()
     {
-        var fan = Instantiate(_fanPrefab, _Butositions[Random.Range(0, _Butositions.Count)].position, Quaternion.identity);
+        _canSpawn = false;
+        var fan = Instantiate(_fanPrefab, transform.position, Quaternion.identity, boueTransform);
         fan.GetComponent<ButtonManager>().ListOfButtonsPosition = _Butositions;
         fan.GetComponent<FanController>()._bulle = _bulle;
         fan.GetComponent<FanController>().FanSpawner = this;
@@ -30,12 +34,14 @@ public class FanSpawner : MonoBehaviour
 
     public void SetCanSpawn()
     {
+        _canSpawn = true;
         _isCoolD = false;
     }
     
     private void Update()
     {
-
+        if(!_canSpawn)
+            return;
         if (!_isCoolD)
         {
             _isCoolD = true;
@@ -50,8 +56,6 @@ public class FanSpawner : MonoBehaviour
                 spawnChance --;
             }
         }
-
-        
     }
 
     private IEnumerator RetrySpawn()

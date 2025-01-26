@@ -28,7 +28,8 @@ public class ScoreManager : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        _textScore.text = timer.ToString() + "s";
+        // FORMAT
+        _textScore.text = timer.ToString("F2") + "s";
     }
     
 

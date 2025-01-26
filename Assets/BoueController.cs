@@ -23,8 +23,8 @@ public class BoueController : MonoBehaviour
     private int difficultyCounter;
      private float actualTimer;
      
-     private int spawnChance = 4;
-     private int maxSpawnChance = 4;
+     private int spawnChance = 3;
+     private int maxSpawnChance = 3;
      
 
      private void Start()
