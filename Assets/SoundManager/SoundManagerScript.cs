@@ -18,6 +18,11 @@ public class SoundManagerScript : MonoBehaviour
         }
     }
 
+    public void ButtonSound()
+    {
+        ActivateSound(20, "OneShot");
+    }
+
     public void ActivateSound(int soundNumber, string HowPlay){
         foreach(AudioSource audio in audioSources){
             if(audio.isPlaying==false){
@@ -32,14 +37,22 @@ public class SoundManagerScript : MonoBehaviour
         }else if(HowPlay=="LoopStop"){
             loop=false;
         }else if(HowPlay=="OneShot"){
-            selectedSource.clip = SoundListByOrder[soundNumber-1];
-            selectedSource.Play();
+            AudioSource source = gameObject.AddComponent<AudioSource>();
+            source.clip = SoundListByOrder[soundNumber-1];
+            source.Play();
+            StartCoroutine(DestroyAfterFinished(source, source.clip.length));
         }else if(HowPlay=="PitchRandomLoopStart"){
             Pitchloop=true;
             StartCoroutine(PitchLoop(SoundListByOrder[soundNumber-1], selectedSource));
         }else if(HowPlay=="PitchRandomLoopStop"){
             Pitchloop=false;
         }
+    }
+
+    IEnumerator DestroyAfterFinished(AudioSource source,float time)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(source);
     }
 
     IEnumerator Loop(AudioClip clip, AudioSource source){
