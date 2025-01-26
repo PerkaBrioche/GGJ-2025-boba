@@ -5216,7 +5216,7 @@ MonoBehaviour:
   _bumpForce: 7
   _cooldownJump: 2
   _inputTimeLocker: 1.5
-  _bulleMaterial: {fileID: 0}
+  _bulleMaterial: {fileID: 4820244702389702957}
   _boueTransform: {fileID: 943395194}
   _bobaController: {fileID: 919132148996798452}
   _raycastDownRange: 2.2

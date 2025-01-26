@@ -70,7 +70,7 @@ public class PlayerManager : MonoBehaviour
     private void Death()
     {
         _isDead = true;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(3);
     }
 
     private IEnumerator CoroutineInvicible()

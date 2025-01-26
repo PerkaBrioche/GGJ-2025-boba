@@ -107,7 +107,12 @@ public class BubleMovement : MonoBehaviour
 
             if (_playerInput.x != 0 || _playerInput.y != 0)
             {
-                _bobaController.SetState(BobaController.BobaState.running);
+
+                if (IsGrounded())
+                {
+                    _bobaController.SetState(BobaController.BobaState.running);
+                }
+                
                 _bobaController.UpdatePlayerInput(-_playerInput);
             }
             else
