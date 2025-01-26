@@ -11,20 +11,15 @@ public class BestScoreScipt : MonoBehaviour
 
     private void Start()
     {
+
         if (actualScore != null)
         {
             int score = PlayerPrefs.GetInt("ActualScore");
-            actualScore.text = score.ToString() ;
+            actualScore.text = score.ToString();
         }
         bestScoreNumber = PlayerPrefs.GetInt("BestScore");
-        if (bestScoreNumber == 0)
-        {
-            bestScore.text = "0";
-        }else
-        {
-            bestScore.text = bestScore.ToString();
-        }
-  
+        bestScore.text = bestScoreNumber.ToString();
+
         
     }
 }

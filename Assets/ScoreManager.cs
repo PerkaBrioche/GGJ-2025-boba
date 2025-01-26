@@ -48,8 +48,9 @@ public class ScoreManager : MonoBehaviour
     public void PlayerIsDead()
     {
         _totalScore = Mathf.FloorToInt(timer);
+        int old = PlayerPrefs.GetInt("ActualScore");
         PlayerPrefs.SetInt("ActualScore", _totalScore);
-        if(_totalScore >= PlayerPrefs.GetInt("ActualScore"))
+        if(_totalScore >= old)
         {
             PlayerPrefs.SetInt("BestScore", _totalScore);
         }
