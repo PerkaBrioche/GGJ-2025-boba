@@ -10,11 +10,28 @@ public class SoundManagerScript : MonoBehaviour
     bool loop=false;
     bool Pitchloop=false;
     AudioSource selectedSource;
+    [SerializeField] bool isSongPlayed;
+    [SerializeField] int songNumber;
+    [SerializeField] private AudioSource songSource;
 
     private void Awake(){
 
         if (instance==null){
             instance = this;
+        }
+    }
+
+    private void Start()
+    {
+        if (isSongPlayed)
+        {
+            songSource.enabled=true;
+            songSource.clip = SoundListByOrder[songNumber - 1];
+            Debug.Log("JOUE LE SON LA");
+        }
+        else
+        {
+            songSource.enabled=false;
         }
     }
 
