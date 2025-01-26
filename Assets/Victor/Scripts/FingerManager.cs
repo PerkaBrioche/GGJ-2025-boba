@@ -4,16 +4,25 @@ using UnityEngine;
 
 public class FingerManager : MonoBehaviour
 {
-    [SerializeField] Transform model;
-    [SerializeField] float backAmount = 20f;
+    [SerializeField] List<NetCorner> corners;
+    [SerializeField] float from;
+    [SerializeField] float to;
     [SerializeField] float timeToGo = 5f;
-    Vector3 playerPos;
+
     private void Start()
     {
-        playerPos = transform.position;
-        model.localEulerAngles = Vector3.up * Random.Range(0f, 360f);
-        model.position = Vector3.back * backAmount;
+        transform.localEulerAngles = Vector3.up * Random.Range(0, 360);
         StartCoroutine(Animation());
+    }
+
+    public void Damage(NetCorner corner)
+    {
+        corners.Remove(corner);
+        Destroy(corner.gameObject);
+        if (corners.Count == 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,22 +36,16 @@ public class FingerManager : MonoBehaviour
     IEnumerator Animation()
     {
         float t = 0f;
-
-        model.position = Vector3.back * backAmount;
+        Vector3 m_from = transform.forward * from;
+        Vector3 m_to = (-transform.forward) * to;
+        transform.LookAt(m_to, Vector3.up);
         while (t < timeToGo)
         {
             yield return null;
             t += Time.deltaTime;
-            model.position = Vector3.forward * backAmount * (t / timeToGo);
+            transform.position = Vector3.Lerp(m_from, m_to, t / timeToGo);
         }
-
-        t = 0f;
-        while (t < timeToGo / 4)
-        {
-            yield return null;
-            t += Time.deltaTime;
-            model.position = Vector3.forward * (backAmount - (backAmount * (t / timeToGo / 4)));
-        }
+        transform.position = Vector3.Lerp(m_from, m_to, 1f);
         Destroy(gameObject);
     }
 }

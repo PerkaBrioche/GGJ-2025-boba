@@ -36,8 +36,8 @@ public class NetManager : MonoBehaviour
     IEnumerator Animation()
     {
         float t = 0f;
-        Vector3 m_from = transform.forward * from;
-        Vector3 m_to = (-transform.forward) * to;
+        Vector3 m_from = transform.forward * from + Vector3.up * transform.position.y;
+        Vector3 m_to = (-transform.forward) * to + Vector3.up * transform.position.y;
         transform.LookAt(m_to, Vector3.up);
         while (t < timeToGo)
         {
