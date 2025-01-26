@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class Shoot : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed = 1f;
+    [SerializeField] private LayerMask layer;
     
     [SerializeField] InputAction mouseCord;
     [SerializeField] InputAction mouseClick;
@@ -24,10 +25,10 @@ public class Shoot : MonoBehaviour
         crosshair = Instantiate(crosshairPrefab).transform;
         EnableInputs();
         mouseClick.performed += OnMouseClick;
-        mouseClick.canceled += OnMouseTopClicking;
+        mouseClick.canceled += OnMouseStopClicking;
     }
 
-    private void OnMouseTopClicking(InputAction.CallbackContext context)
+    private void OnMouseStopClicking(InputAction.CallbackContext context)
     {
         if(waterParticle.isPlaying)
         {
@@ -47,7 +48,7 @@ public class Shoot : MonoBehaviour
         {
             foreach (Collider hit in colliders)
             {
-                if (hit.GetComponent<Collider>().gameObject.TryGetComponent<IDamageable>(out IDamageable damageable))
+                if (hit.gameObject.TryGetComponent(out IDamageable damageable))
                 {
                     damageable.Damage();
                 }
@@ -59,17 +60,17 @@ public class Shoot : MonoBehaviour
     private void Update()
     {
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseCord.ReadValue<Vector2>()), out hit))
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out hit,1000f ,layer))
         {
             if(Vector2.Distance(new Vector2(player.position.x,player.position.z), new Vector2(hit.point.x,hit.point.z)) > maxDistance)
             {
                 Vector2 dir = (new Vector2(hit.point.x, hit.point.z)) - (new Vector2(player.position.x, player.position.z));
                 dir = dir.normalized * maxDistance;
-                crosshair.transform.position = new Vector3(player.position.x + dir.x, crosshair.transform.position.y, player.position.z + dir.y);
+                crosshair.transform.position = new Vector3(player.position.x + dir.x, hit.point.y + 0.01f, player.position.z + dir.y);
             }
             else
             {
-                crosshair.transform.position = new Vector3(hit.point.x, crosshair.transform.position.y, hit.point.z);
+                crosshair.transform.position = new Vector3(hit.point.x, hit.point.y + 0.01f, hit.point.z);
             }
             
         }

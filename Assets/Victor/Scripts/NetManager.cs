@@ -11,6 +11,15 @@ public class NetManager : MonoBehaviour
 
     private void Start()
     {
+        if(gameObject.name == "NetSpawn(Clone)")
+        {
+            SoundManagerScript.instance.ActivateSound(14, "OneShot");
+        }
+        else if(gameObject.name == "Wave(Clone)")
+        {
+            SoundManagerScript.instance.ActivateSound(12, "OneShot");
+            
+        }
         transform.localEulerAngles = Vector3.up * Random.Range(0, 360);
         StartCoroutine(Animation());
     }
@@ -36,8 +45,8 @@ public class NetManager : MonoBehaviour
     IEnumerator Animation()
     {
         float t = 0f;
-        Vector3 m_from = transform.forward * from;
-        Vector3 m_to = (-transform.forward) * to;
+        Vector3 m_from = transform.forward * from + Vector3.up * transform.position.y;
+        Vector3 m_to = (-transform.forward) * to + Vector3.up * transform.position.y;
         transform.LookAt(m_to, Vector3.up);
         while (t < timeToGo)
         {
