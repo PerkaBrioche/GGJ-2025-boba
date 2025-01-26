@@ -3588,6 +3588,7 @@ MonoBehaviour:
   bubleTransform: {fileID: 1400142844}
   MinPosBoue: {fileID: 1590709829}
   MaxPosBoue: {fileID: 1692198176}
+  SpawnPrefab: {fileID: 0}
 --- !u!111 &943395196
 Animation:
   m_ObjectHideFlags: 0

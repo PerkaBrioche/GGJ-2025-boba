@@ -19,7 +19,7 @@ public class ButtonManager : MonoBehaviour
     {
         foreach (var buttonPosition in ListOfButtonsPosition)
         {
-            var but = Instantiate(ButtonPrefab, buttonPosition.position, buttonPosition.rotation);
+            var but = Instantiate(ButtonPrefab, buttonPosition.position, buttonPosition.rotation, buttonPosition);
             
             ButtonSpawned.Add(but);
         }

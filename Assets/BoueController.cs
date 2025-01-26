@@ -18,6 +18,8 @@ public class BoueController : MonoBehaviour
     [SerializeField] private Transform bubleTransform;
     [SerializeField] private Transform MinPosBoue;
     [SerializeField] private Transform MaxPosBoue;
+    
+    [SerializeField] private Transform SpawnPrefab;
     private int difficultyCounter;
      private float actualTimer;
      
@@ -103,7 +105,6 @@ public class BoueController : MonoBehaviour
 
     private void SpawnGeaysear()
     {
-        
         Instantiate(_geyesearPrefab, bubleTransform.position, Quaternion.identity);
     }
 }

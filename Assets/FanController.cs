@@ -6,6 +6,7 @@ public class FanController : MonoBehaviour
 {
     [SerializeField] public Transform _bulle;
     [SerializeField] private float PushForce = 5;
+    [SerializeField] public FanSpawner FanSpawner;
 
 
     private void Start()
@@ -40,6 +41,7 @@ public class FanController : MonoBehaviour
 
     public void End()
     {
+        FanSpawner.SetCanSpawn();
         StartCoroutine(LerpPosition());
     }
     
