@@ -50,9 +50,7 @@ public class BobaController : MonoBehaviour
         
         
         Vector3 targetDirection = new Vector3(_playerInput.x, 0, _playerInput.y);
-
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, speedRotation * Time.deltaTime);
 
         

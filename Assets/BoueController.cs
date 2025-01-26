@@ -13,8 +13,17 @@ public class BoueController : MonoBehaviour
     [SerializeField] private Transform MaxPos;
 
 
+
+    [SerializeField] private GameObject _geyesearPrefab;
+    [SerializeField] private Transform bubleTransform;
+    [SerializeField] private Transform MinPosBoue;
+    [SerializeField] private Transform MaxPosBoue;
     private int difficultyCounter;
      private float actualTimer;
+     
+     private int spawnChance = 4;
+     private int maxSpawnChance = 4;
+     
 
      private void Start()
      {
@@ -71,6 +80,15 @@ public class BoueController : MonoBehaviour
             ScoreManager.instance.NewDifficulty();
         }
         StartTimer();
+        if (Random.Range(0, spawnChance) == 0)
+        {
+            SpawnGeaysear();
+            spawnChance = maxSpawnChance;
+        }
+        else
+        {
+            spawnChance--;
+        }
 
     }
     public void StartTimer()
@@ -82,5 +100,11 @@ public class BoueController : MonoBehaviour
     {
         movingDuration *= 0.95f;
         timeBeforeChangePosition *= 0.95f;
+    }
+
+    private void SpawnGeaysear()
+    {
+        
+        Instantiate(_geyesearPrefab, bubleTransform.position, Quaternion.identity);
     }
 }

@@ -7,6 +7,8 @@ using UnityEngine.UIElements;
 
 public class Shoot : MonoBehaviour
 {
+    [SerializeField] private float rotationSpeed = 1f;
+    
     [SerializeField] InputAction mouseCord;
     [SerializeField] InputAction mouseClick;
     Transform crosshair;
@@ -72,6 +74,11 @@ public class Shoot : MonoBehaviour
             }
             
         }
+        
+        Vector3 targetDirection = crosshair.position - transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        
     }
 
     void EnableInputs()
