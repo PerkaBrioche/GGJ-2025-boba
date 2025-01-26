@@ -18,6 +18,11 @@ public class SoundManagerScript : MonoBehaviour
         }
     }
 
+    public void ButtonSound()
+    {
+        ActivateSound(20, "OneShot");
+    }
+
     public void ActivateSound(int soundNumber, string HowPlay){
         foreach(AudioSource audio in audioSources){
             if(audio.isPlaying==false){
