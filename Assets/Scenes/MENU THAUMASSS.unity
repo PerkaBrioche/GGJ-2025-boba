@@ -1034,14 +1034,14 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 262828392}
         m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-        m_MethodName: QuitGame
-        m_Mode: 1
+        m_MethodName: LoadSceneAction
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: ControlMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &350362119
@@ -2261,14 +2261,14 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 262828392}
         m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-        m_MethodName: QuitGame
-        m_Mode: 1
+        m_MethodName: LoadSceneAction
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Gabriel
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &959394191
