@@ -72,7 +72,7 @@ public class PlayerManager : MonoBehaviour
     {
         _isDead = true;
         SoundManagerScript.instance.ActivateSound(6, "OneShot");
-        SceneManager.LoadScene("MENU THAUMASSS");
+        SceneManager.LoadScene("DefeatMenu");
     }
 
     private IEnumerator CoroutineInvicible()
