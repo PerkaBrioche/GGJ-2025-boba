@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class Shoot : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed = 1f;
+    [SerializeField] private LayerMask layer;
     
     [SerializeField] InputAction mouseCord;
     [SerializeField] InputAction mouseClick;
@@ -59,7 +60,7 @@ public class Shoot : MonoBehaviour
     private void Update()
     {
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseCord.ReadValue<Vector2>()), out hit))
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(mouseCord.ReadValue<Vector2>()),out hit,1000f ,layer))
         {
             if(Vector2.Distance(new Vector2(player.position.x,player.position.z), new Vector2(hit.point.x,hit.point.z)) > maxDistance)
             {
