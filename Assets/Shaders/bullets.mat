@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ball
+  m_Name: bullets
   m_Shader: {fileID: -6465566751694194690, guid: 7305b2ae3b33dee47b79f6aa3e1b4f85, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -47,10 +47,10 @@ Material:
     - _Frequence: 1.93
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Vitesse: -2.01
-    - _alpha: 2.21
+    - _Vitesse: 24.42
+    - _alpha: 0.79
     m_Colors:
-    - _Color: {r: 0.96016437, g: 0.84339625, b: 1, a: 0}
+    - _Color: {r: 0.86415094, g: 0.37663934, b: 0.8062849, a: 0}
     - _Emission_1: {r: 0.351221, g: 0.62419707, b: 0.7660377, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
