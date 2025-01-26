@@ -11,6 +11,14 @@ public class NetManager : MonoBehaviour
 
     private void Start()
     {
+        if(gameObject.name == "NetSpawn")
+        {
+            SoundManagerScript.instance.ActivateSound(14, "OneShot");
+        }
+        else if(gameObject.name == "Wave")
+        {
+            SoundManagerScript.instance.ActivateSound(12, "OneShot");
+        }
         transform.localEulerAngles = Vector3.up * Random.Range(0, 360);
         StartCoroutine(Animation());
     }

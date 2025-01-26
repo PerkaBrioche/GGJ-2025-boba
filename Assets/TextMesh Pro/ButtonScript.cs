@@ -29,7 +29,7 @@ public class ButtonScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("P") || Input.GetKeyDown("escape"))
+        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
         {
             Pause();
         }
