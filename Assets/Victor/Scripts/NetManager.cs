@@ -8,9 +8,18 @@ public class NetManager : MonoBehaviour
     [SerializeField] float from;
     [SerializeField] float to;
     [SerializeField] float timeToGo = 5f;
+    
+    [SerializeField] private BoxCollider boxCollider;
 
+
+    private IEnumerator EnableCollider()
+    {
+        yield return new WaitForSeconds(0.3f);
+        boxCollider.enabled = true;
+    }
     private void Start()
     {
+        StartCoroutine(EnableCollider());
         if(gameObject.name == "NetSpawn(Clone)")
         {
             SoundManagerScript.instance.ActivateSound(14, "OneShot");
