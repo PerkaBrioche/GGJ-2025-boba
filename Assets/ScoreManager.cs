@@ -7,14 +7,11 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance;
 
     [SerializeField] private TextMeshProUGUI _textScore;
-    [SerializeField] private float baseTimeBeforeIncrement;
     [SerializeField] private float reduceTimer;
     
-    private int Increment = 1;
     private int _totalSccore;
 
     private float timer;
-    private float timeBeforeIncrement;
 
     private void Awake()
     {
@@ -26,36 +23,14 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        timeBeforeIncrement = baseTimeBeforeIncrement;
     }
 
     private void Update()
     {
-        _textScore.text = _totalSccore + "m";
-
-        if (timer < timeBeforeIncrement)
-        {
-            timer += Time.deltaTime;
-        }
-        else
-        {
-            timer = 0;
-            AddScore();
-            timeBeforeIncrement = baseTimeBeforeIncrement;
-        }
+        timer += Time.deltaTime;
+        _textScore.text = timer.ToString() + "s";
     }
-
-
-    private void AddScore()
-    {
-        _totalSccore += Increment;
-    }
-
-    public void NewDifficulty()
-    {
-        //Increment++;
-        baseTimeBeforeIncrement *= reduceTimer;
-    }
+    
 
     private void OnValidate()
     {

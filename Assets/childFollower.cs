@@ -16,7 +16,9 @@ public class childFollower : MonoBehaviour
 
     public void ChangeAxisY()
     {
+        
         yaxis = !yaxis;
+        Debug.Log("CHANGE AXIS" + yaxis);
     }
     private void Update()
     {
