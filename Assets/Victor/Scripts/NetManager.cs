@@ -38,7 +38,8 @@ public class NetManager : MonoBehaviour
     {
         corners.Remove(corner);
         Destroy(corner.gameObject);
-        if(corners.Count == 0)
+        SoundManagerScript.instance.ActivateSound(15, "OneShot");
+        if (corners.Count == 0)
         {
             Destroy(gameObject);
         }

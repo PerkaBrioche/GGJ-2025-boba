@@ -18,6 +18,7 @@ public class obstacleController : MonoBehaviour
                 alreadyHit = true;
             }
             other.GetComponent<BubleMovement>().GetBounce(transform.position);
+            SoundManagerScript.instance.ActivateSound(7, "OneShot");
         }
     }
 }
